@@ -1,7 +1,7 @@
 # 💤configured LazyVim
 
 ~~~
-git@github.com:StepanenkoArtem/.dotfiles.git ~/.config/nvim
+git clone git@github.com:StepanenkoArtem/.dotfiles.git ~/.config/nvim
 ~~~
 
 
