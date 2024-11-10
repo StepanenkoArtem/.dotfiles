@@ -15,11 +15,12 @@ return {
       },
       diagnostics = {
         -- underline = true,
-        -- virtual_text = true,
-        -- float = {
-        --   border = "rounded",
-        -- },
+        virtual_text = true,
+        float = {
+          border = "rounded",
+        },
       },
+
       servers = {
         kotlin_language_server = {},
         -- https://github.com/typescript-language-server/typescript-language-server/pull/218
