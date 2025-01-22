@@ -73,10 +73,7 @@ return {
         rubocop = {
           cmd = { "rubocop", "--lsp" },
         },
-        bacon_ls = {
-          enabled = diagnostics == "bacon-ls",
-        },
-        rust_analyzer = { enabled = false },
+        rust_analyzer = { enabled = true },
         taplo = {
           keys = {
             {
