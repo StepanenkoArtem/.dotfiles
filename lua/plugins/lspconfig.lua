@@ -64,7 +64,7 @@ return {
         },
         ruby_lsp = {
           mason = false,
-          cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+          cmd = { vim.fn.systemlist("which ruby-lsp")[1] },
         },
         solargraph = {
           mason = false,
@@ -124,6 +124,7 @@ return {
             clangdFileStatus = true,
           },
         },
+
       },
       setup = {
         clangd = function(_, opts)
