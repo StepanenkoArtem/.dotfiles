@@ -5,6 +5,13 @@ return {
   --   opts = {},
   -- },
   {
+    "glepnir/nerdicons.nvim",
+    cmd = "NerdIcons",
+    config = function()
+      require("nerdicons").setup({})
+    end,
+  },
+  {
     "tigion/nvim-asciidoc-preview",
     ft = { "asciidoc" },
     opts = {},
