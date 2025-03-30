@@ -18,6 +18,7 @@ end)
 vim.keymap.set("n", "<leader>[", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 vim.keymap.set("n", "<leader>]", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
 vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set("i", "kk", "<Esc>")
 vim.keymap.set("i", "оо", "<Esc>")
 
 local builtin = require("telescope.builtin")
@@ -27,4 +28,4 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set('n', '<leader>h', vim.diagnostic.open_float)
-
+vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
