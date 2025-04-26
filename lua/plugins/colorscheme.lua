@@ -15,4 +15,8 @@ return {
     })
     vim.cmd([[colorscheme monokai-pro]])
   end,
+  override = {
+    FloatBorder = { fg = "#bbbbbb", bg = "#1e1e1e" },
+    NormalFloat = { fg = "#bbbbbb", bg = '#777777' },
+  },
 }
