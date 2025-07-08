@@ -4,7 +4,10 @@
 local bind = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
--- for russian layout
+vim.o.langmap =
+  "ФИСВУАПРШОЛДЬТЩЗЙКІЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкіегмцчня;abcdefghijklmnopqrstuvwxyz"
+
+-- for cyrillic layout
 bind("i", "<c-х>", "<C-[>", opts)
 bind("n", "л", "gk", opts)
 bind("n", "о", "gj", opts)
@@ -20,6 +23,7 @@ vim.keymap.set("n", "<leader>]", "<Cmd>call append(line('.'),     repeat([''], v
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("i", "kk", "<Esc>")
 vim.keymap.set("i", "оо", "<Esc>")
+vim.keymap.set("i", "лл", "<Esc>")
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
@@ -28,4 +32,3 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>C", "<cmd>CodeCompanionAction<CR>", { desc = "Toggle Code CodeCompanion" })
