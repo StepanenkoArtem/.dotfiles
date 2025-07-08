@@ -58,7 +58,7 @@ return {
         ltex = {
           settings = {
             ltex = {
-              language = "ru-RU",
+              language = "ua-UA",
             },
           },
         },
@@ -66,12 +66,15 @@ return {
           mason = false,
           cmd = { vim.fn.systemlist("which ruby-lsp")[1] },
         },
-        solargraph = {
-          mason = false,
-          enabled = false,
-        },
+        -- solargraph = {
+        --   mason = true,
+        --   enabled = true,
+        -- },
         rubocop = {
           cmd = { "rubocop", "--lsp" },
+          flags = {
+            debounce_text_changes = 1500,
+          },
         },
         rust_analyzer = { enabled = true },
         taplo = {
@@ -124,7 +127,6 @@ return {
             clangdFileStatus = true,
           },
         },
-
       },
       setup = {
         clangd = function(_, opts)
