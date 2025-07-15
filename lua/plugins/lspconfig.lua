@@ -77,6 +77,30 @@ return {
           },
         },
         rust_analyzer = { enabled = true },
+        ruff = {
+          cmd_env = { RUFF_TRACE = "messages" },
+          init_options = {
+            settings = {
+              logLevel = "error",
+            },
+          },
+          keys = {
+            {
+              "<leader>co",
+              LazyVim.lsp.action["source.organizeImports"],
+              desc = "Organize Imports",
+            },
+          },
+        },
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              LazyVim.lsp.action["source.organizeImports"],
+              desc = "Organize Imports",
+            },
+          },
+        },
         taplo = {
           keys = {
             {
@@ -133,6 +157,13 @@ return {
           local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
           require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
           return false
+        end,
+
+        ["ruff"] = function()
+          LazyVim.lsp.on_attach(function(client, _)
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end, "ruff")
         end,
       },
     },
