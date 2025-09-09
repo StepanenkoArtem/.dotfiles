@@ -22,6 +22,21 @@ return {
       },
 
       servers = {
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                -- Let ruff handle these
+                ignore = { "*" },
+                typeCheckingMode = "basic",
+                diagnosticSeverityOverrides = {
+                  reportUnusedVariable = "none",
+                  reportUnusedImport = "none",
+                },
+              },
+            },
+          },
+        },
         kotlin_language_server = {},
         -- https://github.com/typescript-language-server/typescript-language-server/pull/218
         -- https://github.com/microsoft/TypeScript/issues/13270
@@ -73,8 +88,19 @@ return {
         rubocop = {
           cmd = { "rubocop", "--lsp" },
           flags = {
-            debounce_text_changes = 1500,
+            debounce_text_changes = 5000, -- Increased debounce for large codebase
           },
+          settings = {
+            -- Enable caching for better performance
+            cache = true,
+            -- Use parallel processing
+            parallel = true,
+          },
+          -- Only activate for reasonably sized files
+          filetypes = { "ruby" },
+          root_dir = function(fname)
+            return require("lspconfig.util").root_pattern(".rubocop.yml", "Gemfile")(fname)
+          end,
         },
         rust_analyzer = { enabled = true },
         ruff = {
@@ -82,7 +108,24 @@ return {
           init_options = {
             settings = {
               logLevel = "error",
+              -- Ruff will use the configuration from ruff.toml in the project
+              -- No need to specify args here - it will read from the config file
+              lint = {
+                enable = true,
+                preview = true,
+              },
+              format = {
+                preview = true,
+              },
+              -- Enable organizing imports
+              organizeImports = true,
+              -- Enable fix all
+              fixAll = true,
             },
+          },
+          capabilities = {
+            -- Enable hover for diagnostic info
+            hoverProvider = true,
           },
           keys = {
             {
@@ -161,8 +204,13 @@ return {
 
         ["ruff"] = function()
           LazyVim.lsp.on_attach(function(client, _)
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
+            -- Enable ruff capabilities for Python style checking
+            -- Keep hover enabled to show diagnostic information
+            client.server_capabilities.hoverProvider = true
+            -- Enable code actions for fixes
+            client.server_capabilities.codeActionProvider = true
+            -- Enable formatting
+            client.server_capabilities.documentFormattingProvider = true
           end, "ruff")
         end,
       },
