@@ -32,3 +32,21 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float)
+
+-- Ruff-specific keybindings for Python
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    -- Fix all with <leader>cf
+    vim.keymap.set("n", "<leader>cf", function()
+      -- Save the file first
+      vim.cmd("write")
+      -- Run ruff check --fix to fix imports and other issues
+      vim.fn.system("ruff check --fix " .. vim.fn.expand("%:p"))
+      -- Run ruff format
+      vim.fn.system("ruff format " .. vim.fn.expand("%:p"))
+      -- Reload the buffer
+      vim.cmd("edit!")
+    end, { buffer = true, desc = "Fix All & Format" })
+  end,
+})
