@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       endwise = { enable = true },
-      ensure_installed = { "rust", "ron", "rst" },
+      ensure_installed = { "rust", "ron", "rst", "nginx" },
       -- textobjects = {
       --   swap = {
       --     enable = true,

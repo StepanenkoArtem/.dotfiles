@@ -66,6 +66,7 @@ return {
           filetypes = { "html", "blade" },
         },
         bashls = {},
+        nginx_language_server = {},
         lemminx = {},
         -- phpactor = {
         --   filetypes = { "php", "blade" },
