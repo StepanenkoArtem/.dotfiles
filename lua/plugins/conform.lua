@@ -3,6 +3,8 @@ return {
   opts = {
     formatters_by_ft = {
       nginx = { "nginxbeautifier" },
+      ["yaml.ansible"] = { "prettier" },
+      yaml = { "prettier" },
     },
     formatters = {
       nginxbeautifier = {

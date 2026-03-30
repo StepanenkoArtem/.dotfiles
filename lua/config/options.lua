@@ -6,6 +6,9 @@ vim.o.spell = true
 vim.o.spelllang = "en_us"
 vim.o.linebreak = true
 vim.g.autoformat = false
+vim.opt.wrap = false
+vim.opt.textwidth = 0
+vim.opt.formatoptions:remove({ "t", "c" })
 vim.opt.relativenumber = false
 -- LSP Server to use for Rust.
 -- Set to "bacon-ls" to use bacon-ls instead of rust-analyzer.

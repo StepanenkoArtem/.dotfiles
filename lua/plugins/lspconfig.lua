@@ -2,10 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
-    dependecies = {
-      "mason-nvim",
-      { "williamboman/mason-lspconfig.nvim", config = function() end },
-    },
     opts = {
       inlay_hints = {
         enabled = true,
@@ -103,6 +99,15 @@ return {
             return require("lspconfig.util").root_pattern(".rubocop.yml", "Gemfile")(fname)
           end,
         },
+        ansiblels = {
+          settings = {
+            ansible = {
+              validation = {
+                lint = { enabled = true },
+              },
+            },
+          },
+        },
         rust_analyzer = { enabled = true },
         ruff = {
           cmd_env = { RUFF_TRACE = "messages" },
@@ -163,15 +168,16 @@ return {
       },
       setup = {
         ["ruff"] = function()
-          LazyVim.lsp.on_attach(function(client, _)
-            -- Enable ruff capabilities for Python style checking
-            -- Keep hover enabled to show diagnostic information
-            client.server_capabilities.hoverProvider = true
-            -- Enable code actions for fixes
-            client.server_capabilities.codeActionProvider = true
-            -- Enable formatting
-            client.server_capabilities.documentFormattingProvider = true
-          end, "ruff")
+          vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+              local client = vim.lsp.get_client_by_id(args.data.client_id)
+              if client and client.name == "ruff" then
+                client.server_capabilities.hoverProvider = true
+                client.server_capabilities.codeActionProvider = true
+                client.server_capabilities.documentFormattingProvider = true
+              end
+            end,
+          })
         end,
       },
     },
