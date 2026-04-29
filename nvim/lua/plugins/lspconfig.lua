@@ -10,11 +10,13 @@ return {
         enabled = false,
       },
       diagnostics = {
-        -- underline = true,
-        virtual_text = true,
+        underline = true,
+        virtual_text = false,
+        virtual_lines = { current_line = true },
         float = {
           border = "rounded",
         },
+        severity_sort = true,
       },
 
       servers = {
@@ -108,7 +110,7 @@ return {
             },
           },
         },
-        rust_analyzer = { enabled = true },
+        rust_analyzer = { enabled = false },
         ruff = {
           cmd_env = { RUFF_TRACE = "messages" },
           init_options = {
