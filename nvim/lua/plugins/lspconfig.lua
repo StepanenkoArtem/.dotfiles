@@ -78,7 +78,10 @@ return {
         },
         ruby_lsp = {
           mason = false,
-          cmd = { vim.fn.systemlist("which ruby-lsp")[1] },
+          cmd = (function()
+            local dir = vim.fn.systemlist("mise where ruby")[1] .. "/bin"
+            return { dir .. "/ruby", dir .. "/ruby-lsp" }
+          end)(),
         },
         -- solargraph = {
         --   mason = true,

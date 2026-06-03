@@ -15,6 +15,8 @@ vim.filetype.add({
     [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
     [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
     [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
+    -- Playbooks kept directly under an ansible/ dir (this project's layout)
+    [".*/ansible/.*%.ya?ml"] = "yaml.ansible",
     -- Detect playbooks by content (files with "hosts:" key)
     [".*%.ya?ml"] = {
       function(path, bufnr)
