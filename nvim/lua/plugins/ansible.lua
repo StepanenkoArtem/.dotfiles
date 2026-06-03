@@ -1,8 +1,9 @@
 return {
   -- The lang.ansible extra adds ansible-lint to Mason's ensure_installed,
   -- which would create a second copy (own bundled ansible-core) and shadow
-  -- the mise-managed ansible-lint inside Neovim. Keep a single, mise-aligned
-  -- ansible-lint (same ansible-core as the CLI/CI) by dropping it from Mason.
+  -- the ansible-lint from the mise-managed Python install. Keep a single
+  -- copy (same ansible-core as the CLI/CI) by dropping it from Mason and
+  -- relying on the one already on PATH.
   {
     "mason-org/mason.nvim",
     opts = function(_, opts)
